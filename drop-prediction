@@ -1,0 +1,742 @@
+Loading [MathJax]/jax/output/CommonHTML/fonts/TeX/fontdata.js
+import pandas as pd
+
+# Load the data from the CSV file
+adult = pd.read_csv("D:/2023/Swinburne/Sem 1/Introduction to Data Science/Assignment 2/adult/adult.data", header=None)
+
+# Define the header column names
+header = ["age", "workclass", "fnlwgt", "education", "education-num",
+          "marital-status", "occupation", "relationship", "race", "sex",
+          "capital-gain", "capital-loss", "hours-per-week", "native-country", "income"]
+
+# Assign the header to the DataFrame
+adult.columns = header
+
+# Save the modified dataset with the new header
+modified_file_path = "modified_adult_data.csv"
+adult.to_csv(modified_file_path, index=False)
+
+print(f"Modified dataset saved to '{modified_file_path}'.")
+
+# Print the DataFrame information to verify the header has been added correctly
+print(adult.info())
+Modified dataset saved to 'modified_adult_data.csv'.
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 32561 entries, 0 to 32560
+Data columns (total 15 columns):
+ #   Column          Non-Null Count  Dtype 
+---  ------          --------------  ----- 
+ 0   age             32561 non-null  int64 
+ 1   workclass       32561 non-null  object
+ 2   fnlwgt          32561 non-null  int64 
+ 3   education       32561 non-null  object
+ 4   education-num   32561 non-null  int64 
+ 5   marital-status  32561 non-null  object
+ 6   occupation      32561 non-null  object
+ 7   relationship    32561 non-null  object
+ 8   race            32561 non-null  object
+ 9   sex             32561 non-null  object
+ 10  capital-gain    32561 non-null  int64 
+ 11  capital-loss    32561 non-null  int64 
+ 12  hours-per-week  32561 non-null  int64 
+ 13  native-country  32561 non-null  object
+ 14  income          32561 non-null  object
+dtypes: int64(6), object(9)
+memory usage: 3.7+ MB
+None
+adult. describe(include='number')
+age	fnlwgt	education-num	capital-gain	capital-loss	hours-per-week
+count	32561.000000	3.256100e+04	32561.000000	32561.000000	32561.000000	32561.000000
+mean	38.581647	1.897784e+05	10.080679	1077.648844	87.303830	40.437456
+std	13.640433	1.055500e+05	2.572720	7385.292085	402.960219	12.347429
+min	17.000000	1.228500e+04	1.000000	0.000000	0.000000	1.000000
+25%	28.000000	1.178270e+05	9.000000	0.000000	0.000000	40.000000
+50%	37.000000	1.783560e+05	10.000000	0.000000	0.000000	40.000000
+75%	48.000000	2.370510e+05	12.000000	0.000000	0.000000	45.000000
+max	90.000000	1.484705e+06	16.000000	99999.000000	4356.000000	99.000000
+adult.describe(include='object')
+workclass	education	marital-status	occupation	relationship	race	sex	native-country	income
+count	32561	32561	32561	32561	32561	32561	32561	32561	32561
+unique	9	16	7	15	6	5	2	42	2
+top	Private	HS-grad	Married-civ-spouse	Prof-specialty	Husband	White	Male	United-States	<=50K
+freq	22696	10501	14976	4140	13193	27816	21790	29170	24720
+Task 2 - Data Exploration
+Task 2.1: Explore each column
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+# Descriptive Statistics
+age_mean = adult["age"].mean()
+age_median = adult["age"].median()
+age_min = adult["age"].min()
+age_max = adult["age"].max()
+age_std = adult["age"].std()
+
+print("Descriptive Statistics for Age:")
+print(f"Mean: {age_mean:.2f}")
+print(f"Median: {age_median:.2f}")
+print(f"Minimum: {age_min}")
+print(f"Maximum: {age_max}")
+print(f"Standard Deviation: {age_std:.2f}")
+print("=" * 40)
+
+# Graphical Visualization: Histogram
+plt.figure(figsize=(10, 6))
+sns.histplot(data=adult, x="age", bins=20, kde=True)
+plt.title("Age Distribution")
+plt.xlabel("Age")
+plt.ylabel("Frequency")
+plt.show()
+Descriptive Statistics for Age:
+Mean: 38.58
+Median: 37.00
+Minimum: 17
+Maximum: 90
+Standard Deviation: 13.64
+========================================
+
+# Workclass: Bar Chart
+plt.figure(figsize=(10, 6))
+sns.countplot(data=adult, y="workclass")
+plt.title("Workclass Distribution")
+plt.ylabel("Workclass")
+plt.show()
+
+# Education
+print("Education Value Counts:")
+print(adult["education"].value_counts())
+sns.countplot(data=adult, y="education")
+plt.title("Education Distribution")
+plt.show()
+Education Value Counts:
+ HS-grad         10501
+ Some-college     7291
+ Bachelors        5355
+ Masters          1723
+ Assoc-voc        1382
+ 11th             1175
+ Assoc-acdm       1067
+ 10th              933
+ 7th-8th           646
+ Prof-school       576
+ 9th               514
+ 12th              433
+ Doctorate         413
+ 5th-6th           333
+ 1st-4th           168
+ Preschool          51
+Name: education, dtype: int64
+
+# Occupation
+print("Occupation Value Counts:")
+print(adult["occupation"].value_counts())
+sns.countplot(data=adult, y="occupation")
+plt.title("Occupation Distribution")
+plt.show()
+Occupation Value Counts:
+ Prof-specialty       4140
+ Craft-repair         4099
+ Exec-managerial      4066
+ Adm-clerical         3770
+ Sales                3650
+ Other-service        3295
+ Machine-op-inspct    2002
+ ?                    1843
+ Transport-moving     1597
+ Handlers-cleaners    1370
+ Farming-fishing       994
+ Tech-support          928
+ Protective-serv       649
+ Priv-house-serv       149
+ Armed-Forces            9
+Name: occupation, dtype: int64
+
+# Relationship
+print("Relationship Value Counts:")
+print(adult["relationship"].value_counts())
+sns.countplot(data=adult, y="relationship")
+plt.title("Relationship Distribution")
+plt.show()
+Relationship Value Counts:
+ Husband           13193
+ Not-in-family      8305
+ Own-child          5068
+ Unmarried          3446
+ Wife               1568
+ Other-relative      981
+Name: relationship, dtype: int64
+
+# Race: Bar Chart
+plt.figure(figsize=(10, 6))
+sns.countplot(data=adult, y="race")
+plt.title("Race Distribution")
+plt.ylabel("Race")
+plt.show()
+
+# Sex: Pie Chart
+sex_counts = adult["sex"].value_counts()
+plt.figure(figsize=(6, 6))
+plt.pie(sex_counts, labels=sex_counts.index, autopct='%1.1f%%', startangle=90)
+plt.title("Gender Distribution")
+plt.axis('equal')
+plt.show()
+
+# Capital-gain
+print("Capital-gain Descriptive Statistics:")
+print(adult["capital-gain"].describe())
+sns.histplot(data=adult, x="capital-gain", bins=20)
+plt.title("Distribution of Capital-gain")
+plt.show()
+Capital-gain Descriptive Statistics:
+count    32561.000000
+mean      1077.648844
+std       7385.292085
+min          0.000000
+25%          0.000000
+50%          0.000000
+75%          0.000000
+max      99999.000000
+Name: capital-gain, dtype: float64
+
+# Capital-loss
+print("Capital-loss Descriptive Statistics:")
+print(adult["capital-loss"].describe())
+sns.histplot(data=adult, x="capital-loss", bins=20)
+plt.title("Distribution of Capital-loss")
+plt.show()
+Capital-loss Descriptive Statistics:
+count    32561.000000
+mean        87.303830
+std        402.960219
+min          0.000000
+25%          0.000000
+50%          0.000000
+75%          0.000000
+max       4356.000000
+Name: capital-loss, dtype: float64
+
+# Hours-per-week
+print("Hours-per-week Descriptive Statistics:")
+print(adult["hours-per-week"].describe())
+sns.histplot(data=adult, x="hours-per-week", bins=20)
+plt.title("Distribution of Hours-per-week")
+plt.show()
+Hours-per-week Descriptive Statistics:
+count    32561.000000
+mean        40.437456
+std         12.347429
+min          1.000000
+25%         40.000000
+50%         40.000000
+75%         45.000000
+max         99.000000
+Name: hours-per-week, dtype: float64
+
+# Native-country: Bar Chart
+plt.figure(figsize=(12, 6))
+sns.countplot(data=adult, y="native-country")
+plt.title("Native Country Distribution")
+plt.ylabel("Native Country")
+plt.show()
+
+# Income: Pie Chart
+income_counts = adult["income"].value_counts()
+plt.figure(figsize=(6, 6))
+plt.pie(income_counts, labels=income_counts.index, autopct='%1.1f%%', startangle=90)
+plt.title("Income Distribution")
+plt.axis('equal')
+plt.show()
+
+Task 2.2: Explore pairs of columns
+# Select columns for exploring relationships
+columns_to_explore = ["age", "education-num", "hours-per-week", "capital-gain", "capital-loss"]
+
+# Pairwise scatter plots
+sns.pairplot(data=adult, vars=columns_to_explore, hue="income")
+plt.suptitle("Pairwise Scatter Plots of Selected Columns", y=1.02)
+plt.show()
+
+# Correlation matrix heatmap
+correlation_matrix = adult[columns_to_explore].corr()
+plt.figure(figsize=(8, 6))
+sns.heatmap(correlation_matrix, annot=True, cmap="coolwarm")
+plt.title("Correlation Matrix Heatmap")
+plt.show()
+
+
+# Pair 1: Age and Education (Numerical vs Categorical)
+plt.figure(figsize=(12, 6))
+sns.boxplot(data=adult, x="education", y="age")
+plt.title("Age vs Education")
+plt.xlabel("Education")
+plt.ylabel("Age")
+plt.xticks(rotation=45)
+plt.show()
+
+# Pair 2: Hours-per-week and Income (Numerical vs Categorical)
+plt.figure(figsize=(12, 6))
+sns.boxplot(data=adult, x="income", y="hours-per-week")
+plt.title("Hours-per-week vs Income")
+plt.xlabel("Income")
+plt.ylabel("Hours-per-week")
+plt.xticks(rotation=45)
+plt.show()
+
+# Pair 3: Occupation and Relationship (Categorical vs Categorical)
+cross_tab = pd.crosstab(adult["occupation"], adult["relationship"])
+sns.heatmap(cross_tab, annot=True, fmt="d", cmap="YlGnBu")
+plt.title("Occupation vs Relationship")
+plt.xlabel("Relationship")
+plt.ylabel("Occupation")
+plt.show()
+
+# Pair 4: Capital-gain and Education (Numerical vs Categorical)
+plt.figure(figsize=(12, 6))
+sns.boxplot(data=adult, x="education", y="capital-gain")
+plt.title("Capital-gain vs Education")
+plt.xlabel("Education")
+plt.ylabel("Capital-gain")
+plt.xticks(rotation=45)
+plt.show()
+
+# Pair 5: Age and Relationship (Numerical vs Categorical)
+plt.figure(figsize=(12, 6))
+sns.boxplot(data=adult, x="relationship", y="age")
+plt.title("Age vs Relationship")
+plt.xlabel("Relationship")
+plt.ylabel("Age")
+plt.xticks(rotation=45)
+plt.show()
+
+# Pair 6: Race and Income (Categorical vs Categorical)
+cross_tab = pd.crosstab(adult["race"], adult["income"])
+sns.heatmap(cross_tab, annot=True, fmt="d", cmap="YlGnBu")
+plt.title("Race vs Income")
+plt.xlabel("Income")
+plt.ylabel("Race")
+plt.show()
+
+# Pair 7: Marital-status and Education (Categorical vs Categorical)
+cross_tab = pd.crosstab(adult["marital-status"], adult["education"])
+sns.heatmap(cross_tab, annot=True, fmt="d", cmap="YlGnBu")
+plt.title("Marital-status vs Education")
+plt.xlabel("Education")
+plt.ylabel("Marital-status")
+plt.xticks(rotation=45)
+plt.show()
+
+# Pair 8: Capital-loss and Income (Numerical vs Categorical)
+plt.figure(figsize=(12, 6))
+sns.boxplot(data=adult, x="income", y="capital-loss")
+plt.title("Capital-loss vs Income")
+plt.xlabel("Income")
+plt.ylabel("Capital-loss")
+plt.xticks(rotation=45)
+plt.show()
+
+# Pair 9: Sex and Relationship (Categorical vs Categorical)
+cross_tab = pd.crosstab(adult["sex"], adult["relationship"])
+sns.heatmap(cross_tab, annot=True, fmt="d", cmap="YlGnBu")
+plt.title("Sex vs Relationship")
+plt.xlabel("Relationship")
+plt.ylabel("Sex")
+plt.show()
+
+# Pair 10: Workclass and Occupation (Categorical vs Categorical)
+cross_tab = pd.crosstab(adult["workclass"], adult["occupation"])
+sns.heatmap(cross_tab, annot=True, fmt="d", cmap="YlGnBu")
+plt.title("Workclass vs Occupation")
+plt.xlabel("Occupation")
+plt.ylabel("Workclass")
+plt.show()
+
+Is there a relationship between education level and income level in the "Adult" dataset?
+# Calculate average income for each education level
+education_income = adult.groupby("education")["income"].value_counts(normalize=True).unstack().fillna(0)
+
+# Plot a bar plot to visualize income distribution based on education
+plt.figure(figsize=(10, 6))
+education_income.plot(kind="bar", stacked=True)
+plt.title("Income Distribution Based on Education")
+plt.xlabel("Education Level")
+plt.ylabel("Proportion")
+plt.legend(title="Income", labels=["<=50K", ">50K"])
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+<Figure size 1000x600 with 0 Axes>
+
+Task 3: Data Modeling
+from sklearn.model_selection import train_test_split
+
+# Splitting the data into training and test sets for three different suites
+random_seed = 42  # Set a random seed for reproducibility
+
+# Suite1: 50% training and 50% testing
+suite1_train, suite1_test = train_test_split(adult, test_size=0.5, random_state=random_seed)
+
+# Suite2: 60% training and 40% testing
+suite2_train, suite2_test = train_test_split(adult, test_size=0.4, random_state=random_seed)
+
+# Suite3: 80% training and 20% testing
+suite3_train, suite3_test = train_test_split(adult, test_size=0.2, random_state=random_seed)
+
+# Print the sizes of the training and test sets for each suite
+print("Suite1 - Training:", suite1_train.shape, "Testing:", suite1_test.shape)
+print("Suite2 - Training:", suite2_train.shape, "Testing:", suite2_test.shape)
+print("Suite3 - Training:", suite3_train.shape, "Testing:", suite3_test.shape)
+Suite1 - Training: (16280, 15) Testing: (16281, 15)
+Suite2 - Training: (19536, 15) Testing: (13025, 15)
+Suite3 - Training: (26048, 15) Testing: (6513, 15)
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.preprocessing import LabelEncoder
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import classification_report, precision_recall_fscore_support
+
+# Convert categorical variables to numerical using LabelEncoder
+label_encoder = LabelEncoder()
+for col in adult.select_dtypes(include=["object"]).columns:
+    adult[col] = label_encoder.fit_transform(adult[col])
+
+# Extract features (X) and target variable (y)
+X = adult.drop("income", axis=1)
+y = adult["income"]
+
+# Define the random seed
+random_seed = 104
+
+# Split the data for Suite1
+X1_train, X1_test, y1_train, y1_test = train_test_split(X, y,
+                                                    random_state=random_seed,
+                                                    test_size=0.5,
+                                                    shuffle=True)
+
+# Model-specific steps
+# Decision Tree
+decision_tree = DecisionTreeClassifier(random_state=random_seed)
+decision_tree.fit(X1_train, y1_train)
+
+# Random Forest
+random_forest = RandomForestClassifier(random_state=random_seed)
+random_forest.fit(X1_train, y1_train)
+
+# Evaluate models
+for model_name, model in [("Decision Tree", decision_tree), ("Random Forest", random_forest)]:
+    print("Suite1 -", model_name)
+
+    # Predict on training and test sets
+    y1_train_pred = model.predict(X1_train)
+    y1_test_pred = model.predict(X1_test)
+
+    # Evaluation metrics
+    print("Confusion Matrix (Training):")
+    print(confusion_matrix(y1_train, y1_train_pred))
+
+    print("Confusion Matrix (Testing):")
+    print(confusion_matrix(y1_test, y1_test_pred))
+
+    print("Classification Report (Training):")
+    print(classification_report(y1_train, y1_train_pred))
+
+    print("Classification Report (Testing):")
+    print(classification_report(y1_test, y1_test_pred))
+    
+   # Create bar chart for precision, recall, and F1 score
+    metrics = ['Precision', 'Recall', 'F1 Score']
+    train_scores = precision_recall_fscore_support(y1_train, y1_train_pred, average='binary')[:-1]
+    test_scores = precision_recall_fscore_support(y1_test, y1_test_pred, average='binary')[:-1]
+
+    plt.figure(figsize=(10, 6))
+    plt.bar(metrics, train_scores, label='Training', color='b', alpha=0.7)
+    plt.bar(metrics, test_scores, label='Testing', color='g', alpha=0.7)
+    plt.title(f'Comparison of Metrics - {model_name} (Suite 1)')
+    plt.xlabel('Metrics')
+    plt.ylabel('Values')
+    plt.legend()
+    plt.show()
+
+    print("=" * 40)
+Suite1 - Decision Tree
+Confusion Matrix (Training):
+[[12321     0]
+ [    0  3959]]
+Confusion Matrix (Testing):
+[[10804  1595]
+ [ 1482  2400]]
+Classification Report (Training):
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     12321
+           1       1.00      1.00      1.00      3959
+
+    accuracy                           1.00     16280
+   macro avg       1.00      1.00      1.00     16280
+weighted avg       1.00      1.00      1.00     16280
+
+Classification Report (Testing):
+              precision    recall  f1-score   support
+
+           0       0.88      0.87      0.88     12399
+           1       0.60      0.62      0.61      3882
+
+    accuracy                           0.81     16281
+   macro avg       0.74      0.74      0.74     16281
+weighted avg       0.81      0.81      0.81     16281
+
+
+========================================
+Suite1 - Random Forest
+Confusion Matrix (Training):
+[[12321     0]
+ [    2  3957]]
+Confusion Matrix (Testing):
+[[11534   865]
+ [ 1454  2428]]
+Classification Report (Training):
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     12321
+           1       1.00      1.00      1.00      3959
+
+    accuracy                           1.00     16280
+   macro avg       1.00      1.00      1.00     16280
+weighted avg       1.00      1.00      1.00     16280
+
+Classification Report (Testing):
+              precision    recall  f1-score   support
+
+           0       0.89      0.93      0.91     12399
+           1       0.74      0.63      0.68      3882
+
+    accuracy                           0.86     16281
+   macro avg       0.81      0.78      0.79     16281
+weighted avg       0.85      0.86      0.85     16281
+
+
+========================================
+# Split the data for Suite2
+X2_train, X2_test, y2_train, y2_test = train_test_split(X, y,
+                                                    random_state=random_seed,
+                                                    test_size=0.4,
+                                                    shuffle=True)
+
+# Model-specific steps
+# Decision Tree
+decision_tree = DecisionTreeClassifier(random_state=random_seed)
+decision_tree.fit(X2_train, y2_train)
+
+# Random Forest
+random_forest = RandomForestClassifier(random_state=random_seed)
+random_forest.fit(X2_train, y2_train)
+
+# Evaluate models
+for model_name, model in [("Decision Tree", decision_tree), ("Random Forest", random_forest)]:
+    print("Suite2 -", model_name)
+
+    # Predict on training and test sets
+    y2_train_pred = model.predict(X2_train)
+    y2_test_pred = model.predict(X2_test)
+
+    # Evaluation metrics
+    print("Confusion Matrix (Training):")
+    print(confusion_matrix(y2_train, y2_train_pred))
+
+    print("Confusion Matrix (Testing):")
+    print(confusion_matrix(y2_test, y2_test_pred))
+
+    print("Classification Report (Training):")
+    print(classification_report(y2_train, y2_train_pred))
+
+    print("Classification Report (Testing):")
+    print(classification_report(y2_test, y2_test_pred))
+
+    # Create bar chart for precision, recall, and F1 score
+    metrics = ['Precision', 'Recall', 'F1 Score']
+    train_scores = precision_recall_fscore_support(y2_train, y2_train_pred, average='binary')[:-1]
+    test_scores = precision_recall_fscore_support(y2_test, y2_test_pred, average='binary')[:-1]
+
+    plt.figure(figsize=(10, 6))
+    plt.bar(metrics, train_scores, label='Training', color='b', alpha=0.7)
+    plt.bar(metrics, test_scores, label='Testing', color='g', alpha=0.7)
+    plt.title(f'Comparison of Metrics - {model_name} (Suite 1)')
+    plt.xlabel('Metrics')
+    plt.ylabel('Values')
+    plt.legend()
+    plt.show()
+
+    print("=" * 40)
+Suite2 - Decision Tree
+Confusion Matrix (Training):
+[[14844     0]
+ [    0  4692]]
+Confusion Matrix (Testing):
+[[8555 1321]
+ [1158 1991]]
+Classification Report (Training):
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     14844
+           1       1.00      1.00      1.00      4692
+
+    accuracy                           1.00     19536
+   macro avg       1.00      1.00      1.00     19536
+weighted avg       1.00      1.00      1.00     19536
+
+Classification Report (Testing):
+              precision    recall  f1-score   support
+
+           0       0.88      0.87      0.87      9876
+           1       0.60      0.63      0.62      3149
+
+    accuracy                           0.81     13025
+   macro avg       0.74      0.75      0.74     13025
+weighted avg       0.81      0.81      0.81     13025
+
+
+========================================
+Suite2 - Random Forest
+Confusion Matrix (Training):
+[[14844     0]
+ [    1  4691]]
+Confusion Matrix (Testing):
+[[9212  664]
+ [1194 1955]]
+Classification Report (Training):
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     14844
+           1       1.00      1.00      1.00      4692
+
+    accuracy                           1.00     19536
+   macro avg       1.00      1.00      1.00     19536
+weighted avg       1.00      1.00      1.00     19536
+
+Classification Report (Testing):
+              precision    recall  f1-score   support
+
+           0       0.89      0.93      0.91      9876
+           1       0.75      0.62      0.68      3149
+
+    accuracy                           0.86     13025
+   macro avg       0.82      0.78      0.79     13025
+weighted avg       0.85      0.86      0.85     13025
+
+
+========================================
+# Split the data for Suite2
+X3_train, X3_test, y3_train, y3_test = train_test_split(X, y,
+                                                    random_state=random_seed,
+                                                    test_size=0.2,
+                                                    shuffle=True)
+
+# Model-specific steps
+# Decision Tree
+decision_tree = DecisionTreeClassifier(random_state=random_seed)
+decision_tree.fit(X3_train, y3_train)
+
+# Random Forest
+random_forest = RandomForestClassifier(random_state=random_seed)
+random_forest.fit(X3_train, y3_train)
+
+# Evaluate models
+for model_name, model in [("Decision Tree", decision_tree), ("Random Forest", random_forest)]:
+    print("Suite3 -", model_name)
+
+    # Predict on training and test sets
+    y3_train_pred = model.predict(X3_train)
+    y3_test_pred = model.predict(X3_test)
+
+    # Evaluation metrics
+    print("Confusion Matrix (Training):")
+    print(confusion_matrix(y3_train, y3_train_pred))
+
+    print("Confusion Matrix (Testing):")
+    print(confusion_matrix(y3_test, y3_test_pred))
+
+    print("Classification Report (Training):")
+    print(classification_report(y3_train, y3_train_pred))
+
+    print("Classification Report (Testing):")
+    print(classification_report(y3_test, y3_test_pred))
+
+    # Create bar chart for precision, recall, and F1 score
+    metrics = ['Precision', 'Recall', 'F1 Score']
+    train_scores = precision_recall_fscore_support(y3_train, y3_train_pred, average='binary')[:-1]
+    test_scores = precision_recall_fscore_support(y3_test, y3_test_pred, average='binary')[:-1]
+
+    plt.figure(figsize=(10, 6))
+    plt.bar(metrics, train_scores, label='Training', color='b', alpha=0.7)
+    plt.bar(metrics, test_scores, label='Testing', color='g', alpha=0.7)
+    plt.title(f'Comparison of Metrics - {model_name} (Suite 3)')
+    plt.xlabel('Metrics')
+    plt.ylabel('Values')
+    plt.legend()
+    plt.show()
+    
+    print("=" * 40)
+Suite3 - Decision Tree
+Confusion Matrix (Training):
+[[19814     0]
+ [    1  6233]]
+Confusion Matrix (Testing):
+[[4295  611]
+ [ 608  999]]
+Classification Report (Training):
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     19814
+           1       1.00      1.00      1.00      6234
+
+    accuracy                           1.00     26048
+   macro avg       1.00      1.00      1.00     26048
+weighted avg       1.00      1.00      1.00     26048
+
+Classification Report (Testing):
+              precision    recall  f1-score   support
+
+           0       0.88      0.88      0.88      4906
+           1       0.62      0.62      0.62      1607
+
+    accuracy                           0.81      6513
+   macro avg       0.75      0.75      0.75      6513
+weighted avg       0.81      0.81      0.81      6513
+
+
+========================================
+Suite3 - Random Forest
+Confusion Matrix (Training):
+[[19813     1]
+ [    0  6234]]
+Confusion Matrix (Testing):
+[[4574  332]
+ [ 652  955]]
+Classification Report (Training):
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     19814
+           1       1.00      1.00      1.00      6234
+
+    accuracy                           1.00     26048
+   macro avg       1.00      1.00      1.00     26048
+weighted avg       1.00      1.00      1.00     26048
+
+Classification Report (Testing):
+              precision    recall  f1-score   support
+
+           0       0.88      0.93      0.90      4906
+           1       0.74      0.59      0.66      1607
+
+    accuracy                           0.85      6513
+   macro avg       0.81      0.76      0.78      6513
+weighted avg       0.84      0.85      0.84      6513
+
+
+========================================
