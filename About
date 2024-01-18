@@ -1,0 +1,20 @@
+About this dataset
+
+This dataset provides a comprehensive view of students enrolled in various undergraduate degrees offered at a higher education institution. It includes demographic data, social-economic factors and academic performance information that can be used to analyze the possible predictors of student dropout and academic success. 
+
+This dataset contains multiple disjoint databases consisting of relevant information available at the time of enrollment, such as application mode, marital status, course chosen and more. Additionally, this data can be used to estimate overall student performance at the end of each semester by assessing curricular units credited/enrolled/evaluated/approved as well as their respective grades. 
+
+Finally, we have unemployment rate, inflation rate and GDP from the region which can help us further understand how economic factors play into student dropout rates or academic success outcomes. This powerful analysis tool will provide valuable insight into what motivates students to stay in school or abandon their studies for a wide range of disciplines such as agronomy, design, education nursing journalism management social service or technologies
+
+How to use the dataset
+This dataset can be used to understand and predict student dropouts and academic outcomes. The data includes a variety of demographic, social-economic and academic performance factors related to the students enrolled in higher education institutions. The dataset provides valuable insights into the factors that affect student success and could be used to guide interventions and policies related to student retention.
+
+Using this dataset, researchers can investigate two key questions:
+
+1. Which specific predictive factors are linked with student dropout or completion?
+2. How do different features interact with each other?
+
+Research Ideas
+Prediction of Student Retention: This dataset can be used to develop predictive models that can identify student risk factors for dropout and take early interventions to improve student retention rate.
+Improved Academic Performance: By using this data, higher education institutions could better understand their students' academic progress and identify areas of improvement from both an individual and institutional perspective. This will enable them to develop targeted courses, activities, or initiatives that enhance academic performance more effectively and efficiently.
+Accessibility Assistance: Using the demographic information included in the dataset, institutions could develop specific initiatives designed to help certain groups more easily access higher education services or resources that may not typically be available in their area or for their social-economic class, helping close existing gaps in accessibility across different student populations
