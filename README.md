@@ -1,53 +1,45 @@
 # Data-Science
 
-**Readme.txt - Instructions for Code Execution**
+<h2> About this dataset </h2>
 
-This document provides step-by-step instructions on how to execute the code provided in this repository in an automatic manner. Following these instructions will allow you to run the code without the need for further explanations.
+This dataset provides a comprehensive view of students enrolled in various undergraduate degrees offered at a higher education institution. 
 
-**Step 1: Environment Setup**
+It includes demographic data, social-economic factors and academic performance information that can be used to analyze the possible predictors of student dropout and academic success. 
 
-1. Ensure you have Python installed on your system. If not, download and install Python from https://www.python.org/downloads/.
+This dataset contains multiple disjoint databases consisting of relevant information available at the time of enrollment, such as application mode, marital status, course chosen and more. 
 
-2. Install required packages by running the following command in your terminal or command prompt:
-   ```
-   pip install pandas matplotlib seaborn scikit-learn
-   ```
+Additionally, this data can be used to estimate overall student performance at the end of each semester by assessing curricular units credited/enrolled/evaluated/approved as well as their respective grades. 
 
-**Step 2: Download the Code**
+Finally, we have unemployment rate, inflation rate and GDP from the region which can help us further understand how economic factors play into student dropout rates or academic success outcomes. 
 
-1. Download the entire repository containing the code files to your local machine.
+This powerful analysis tool will provide valuable insight into what motivates students to stay in school or abandon their studies for a wide range of disciplines such as agronomy, design, education nursing journalism management social service or technologies
 
-2. Extract the downloaded zip file if applicable.
+Source: [Click here](https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success).
 
-**Step 3: Data**
+Preview of the Dataset: 
 
-1. Download the "Adult" dataset from the provided link.
-
-2. Place the downloaded dataset file ("adult.data") in the same directory as the code files.
-
-**Step 4: Code Execution**
-
-1. Open your terminal or command prompt.
-
-2. Navigate to the directory where you have saved the code files and the "adult.data" dataset file.
-
-3. Run the code by executing the following command:
-   ```
-   python data_analysis_and_modeling.py
-   ```
-
-4. The code will execute and perform data exploration, visualization, and data modeling tasks on the "Adult" dataset.
-
-**Step 5: Review Results**
-
-1. After the code execution is complete, you will see the results displayed in the terminal or command prompt.
-
-2. Visualizations, evaluation metrics, and conclusions will be presented based on the data exploration and modeling tasks.
-
-**Step 6: Explore the Results**
-
-1. Review the generated visualizations and printed results to understand the insights and conclusions derived from the analysis.
-
-2. Use the provided information to gain insights into the dataset, relationships between attributes, and the performance of the machine learning models.
-
-Following these instructions will allow you to execute the code and explore the data analysis and modeling tasks on the "Adult" dataset in an automated manner. If you encounter any issues or have questions, feel free to reach out for assistance.
+| Column name                   | Description                                                                                   |
+|-------------------------------|-----------------------------------------------------------------------------------------------|
+| Marital status                | The marital status of the student. (Categorical)                                              |
+| Application mode              | The method of application used by the student. (Categorical)                                   |
+| Application order             | The order in which the student applied. (Numerical)                                            |
+| Course                        | The course taken by the student. (Categorical)                                                 |
+| Daytime/evening attendance    | Whether the student attends classes during the day or in the evening. (Categorical)             |
+| Previous qualification        | The qualification obtained by the student before enrolling in higher education. (Categorical)  |
+| Nationality                   | The nationality of the student. (Categorical)                                                  |
+| Mother's qualification        | The qualification of the student's mother. (Categorical)                                        |
+| Father's qualification        | The qualification of the student's father. (Categorical)                                        |
+| Mother's occupation           | The occupation of the student's mother. (Categorical)                                           |
+| Father's occupation           | The occupation of the student's father. (Categorical)                                           |
+| Displaced                     | Whether the student is a displaced person. (Categorical)                                        |
+| Educational special needs     | Whether the student has any special educational needs. (Categorical)                            |
+| Debtor                        | Whether the student is a debtor. (Categorical)                                                  |
+| Tuition fees up to date       | Whether the student's tuition fees are up to date. (Categorical)                                |
+| Gender                        | The gender of the student. (Categorical)                                                        |
+| Scholarship holder            | Whether the student is a scholarship holder. (Categorical)                                      |
+| Age at enrollment             | The age of the student at the time of enrollment. (Numerical)                                   |
+| International                 | Whether the student is an international student. (Categorical)                                  |
+| Curricular units 1st sem (credited)    | The number of curricular units credited by the student in the first semester. (Numerical)  |
+| Curricular units 1st sem (enrolled)    | The number of curricular units enrolled by the student in the first semester. (Numerical)  |
+| Curricular units 1st sem (evaluations) | The number of curricular units evaluated by the student in the first semester. (Numerical) |
+| Curricular units 1st sem (approved)    | The number of curricular units approved by the student in the first semester. (Numerical)  |
