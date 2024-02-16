@@ -16,7 +16,7 @@ This powerful analysis tool will provide valuable insight into what motivates st
 
 Source: [Click here](https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success).
 
-Preview of the Dataset: 
+<h2> Preview of the Dataset: </h2>
 
 | Column name                   | Description                                                                                   |
 |-------------------------------|-----------------------------------------------------------------------------------------------|
